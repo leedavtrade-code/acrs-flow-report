@@ -22,7 +22,8 @@ border-radius:8px;padding:4px 12px;font-size:13px;cursor:pointer}
 .tfbar{display:flex;gap:4px;flex-wrap:wrap}
 .tfbar button.active{background:var(--blue);color:#0e1117;font-weight:700;border-color:var(--blue)}
 .viewbar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px}
-#viewtabs button{font-size:14px;padding:6px 16px}
+#viewtabs button,#picktabs button{font-size:14px;padding:6px 16px}
+.stchip{border:1px solid currentColor;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;white-space:nowrap}
 .maplegend{position:absolute;bottom:10px;left:14px;max-width:70%;font-size:12px;color:var(--dim);z-index:5;background:rgba(14,17,23,.7);padding:4px 10px;border-radius:8px}
 #modechip{position:absolute;bottom:10px;right:14px;font-size:12px;color:var(--blue);z-index:5;background:rgba(14,17,23,.7);padding:4px 10px;border-radius:8px}
 #tip{position:fixed;display:none;background:#1e2530;border:1px solid var(--line);border-radius:8px;
@@ -176,7 +177,7 @@ padding:5px 14px;font-size:13px;cursor:pointer}
 <b class="brand">ACRS</b><span class="tb-date"><span id="asof"></span> close</span>
 <span id="regime" class="badge"></span><span id="bblock" class="badge off" style="display:none">Setup B blocked</span>
 <span class="tb-stats"><span id="vix" class="badge"></span><span id="tnx" class="badge neu"></span></span></div>
-<nav class="tabs" id="tabs"><button data-tab="today">Today</button><button data-tab="board">Board</button><button data-tab="markets">Markets</button><button data-tab="invest">Invest</button></nav>
+<nav class="tabs" id="tabs"><button data-tab="today">Today</button><button data-tab="picks">Picks</button><button data-tab="markets">Markets</button></nav>
 </header>
 
 <section class="pane" id="pane-today"><div id="today"></div></section>
@@ -240,6 +241,17 @@ Likewise a <b>+6% bounce</b> inside a falling 150-day MA is still <b>S4 Declinin
 <div class="panel"><div class="vscroll"><div class="tscroll"><table id="sectors"></table></div></div></div>
 </div>
 
+<h2>Sector — price vs modelled value <span class="qmark" onclick="toggleHelp('secval')">?</span></h2>
+<div class="help" id="help-secval" style="display:none">Every valued S&amp;P 500 member is aggregated by sector:
+<b>market cap</b> = Σ(price × shares), <b>modelled cap</b> = Σ(intrinsic value × shares). The ratio is how far the
+sector's price sits above (&gt;1.0) or below (&lt;1.0) what the models can justify. Using <i>all</i> valued members
+matters — aggregating only the Buy list would make every sector look cheap by construction.<br>
+<b>The models have known blind spots.</b> Graham and DCF structurally undervalue asset-light, high-growth businesses
+and misprice banks, insurers and REITs, so a high ratio in Technology or a low one in Financials is partly the model,
+not the market.</div>
+<div class="panel"><div class="tscroll"><table id="secval"></table></div>
+<div class="sub" id="secvalnote" style="margin-top:8px"></div></div>
+
 </div><!-- /view-sector -->
 <div id="view-rotation" style="display:none">
 <div class="sub" id="roth" style="display:none">What this sleeve holds. <span class="qmark" onclick="toggleHelp('rotation')">?</span></div>
@@ -262,7 +274,11 @@ computed from a part-finished month - doing that is what inflates backtests, and
 <div id="drill" class="panel" style="display:none"></div>
 </section>
 
-<section class="pane" id="pane-board" style="display:none">
+<section class="pane" id="pane-picks" style="display:none">
+<div class="tabbar" id="picktabs" style="margin:4px 0 12px">
+<button data-pick="board" onclick="showPick('board')">Trading board</button>
+<button data-pick="value" onclick="showPick('value')">Value screen</button></div>
+<div id="pick-board">
 
 
 <h2>Weekly board <span class="qmark" onclick="toggleHelp('shortlist')">?</span></h2>
@@ -304,36 +320,25 @@ computed from a part-finished month - doing that is what inflates backtests, and
 <div id="board"></div>
 <div class="sub" style="margin-top:8px" id="passnote"></div></div>
 
-</section><!-- /pane-board -->
-
-<section class="pane" id="pane-invest" style="display:none">
+</div><!-- /pick-board -->
+<div id="pick-value" style="display:none">
 <div class="thesis">Buying <b>cheap</b>, not strong. Price below what conservative models say the business is worth.
-This is the <b>Core sleeve</b> — a different discipline from the Trader tab, on a different clock (quarters, not days),
+This is the <b>Core sleeve</b> — a different discipline from the trading board, on a different clock (quarters, not days),
 with a different definition of being wrong (the thesis breaks, not the price).</div>
 
 <div class="panel" style="border-left:3px solid #e8b348;border-radius:0 12px 12px 0;margin-bottom:14px">
-<b style="color:#e8b348">⚠ Not backtested.</b> <span class="dimc">The Trader tab rests on an 11-year backtest with
+<b style="color:#e8b348">⚠ Not backtested.</b> <span class="dimc">The trading board rests on an 11-year backtest with
 walk-forward, bootstrap and a measured noise band. This screen has <b>none of that</b> — no test has ever been run on it.
 It is a research input, not a system: there is no entry rule, no sizing rule, and no exit rule behind these names.
 Treat them as candidates to investigate, not signals.</span></div>
-
-<h2>Sector — price vs modelled value <span class="qmark" onclick="toggleHelp('secval')">?</span></h2>
-<div class="help" id="help-secval" style="display:none">Every valued S&amp;P 500 member is aggregated by sector:
-<b>market cap</b> = Σ(price × shares), <b>modelled cap</b> = Σ(intrinsic value × shares). The ratio is how far the
-sector's price sits above (&gt;1.0) or below (&lt;1.0) what the models can justify. Using <i>all</i> valued members
-matters — aggregating only the Buy list would make every sector look cheap by construction.<br>
-<b>The models have known blind spots.</b> Graham and DCF structurally undervalue asset-light, high-growth businesses
-and misprice banks, insurers and REITs, so a high ratio in Technology or a low one in Financials is partly the model,
-not the market.</div>
-<div class="panel"><div class="tscroll"><table id="secval"></table></div>
-<div class="sub" id="secvalnote" style="margin-top:8px"></div></div>
 
 <h2>Value screen <span class="qmark" onclick="toggleHelp('valuation')">?</span></h2>
 <div class="panel">
 <div id="valwarn"></div>
 <div class="vscroll"><div class="tscroll"><table id="valtable"></table></div></div>
 <div class="sub" style="margin-top:8px" id="valnote"></div></div>
-</section><!-- /pane-invest -->
+</div><!-- /pick-value -->
+</section><!-- /pane-picks -->
 
 <footer class="footer">Generated <span id="gen"></span> · benchmark <span id="bench"></span> · sleeve $<span id="sleeve"></span> · exit = a close below the 50-day MA, sell at the next open · <a href="ACRS_Simulation.html">Simulation</a> · <a href="#" onclick="toggleHelp('glossary');return false">Glossary</a> · not investment advice
 <div class="help" id="help-glossary" style="display:none">
@@ -367,14 +372,29 @@ vx.className='badge '+(D.vix<20?'on':D.vix<30?'mix':'off');vx.title='Context onl
 if(D.spy_on===false)$('bblock').style.display='';
 {const T=((D.briefing||{}).market||{}).tnx; if(T) $('tnx').textContent='10Y '+T.level.toFixed(2)+'%';}
 // ── TABS (redesign 2026-09-24) ─────────────────────────────────────────────────────
-// One job per tab: Today = the evening check, Board = the weekly review, Markets = context,
-// Invest = the Core sleeve. The hash makes each tab linkable (…/#board).
-const TABS=['today','board','markets','invest'];
+// One job per tab: Today = the evening check, Picks = what to buy (trading board + value
+// screen, 2026-09-24: David asked for them together), Markets = context incl. sector value.
+// The hash makes each view linkable; #board and #invest stay valid and open Picks.
+const TABS=['today','picks','markets'];
+const ALIAS={board:['picks','board'],invest:['picks','value']};
+let PICK='board';
+function pickHash(){return PICK==='value'?'invest':'board';}
+function showPick(v,push){
+ PICK=(v==='value')?'value':'board';
+ $('pick-board').style.display=PICK==='board'?'':'none';
+ $('pick-value').style.display=PICK==='value'?'':'none';
+ document.querySelectorAll('#picktabs button').forEach(b=>b.classList.toggle('active',b.dataset.pick===PICK));
+ if(PICK==='value' && D.valuation) renderValuation();
+ if(push!==false && location.hash!=='#'+pickHash()) history.replaceState(null,'','#'+pickHash());
+}
+window.showPick=showPick;
 function showTab(t,push){
+ let sub=null;
+ if(ALIAS[t]){sub=ALIAS[t][1]; t=ALIAS[t][0];}
  if(!TABS.includes(t)) t='today';
  TABS.forEach(k=>{$('pane-'+k).style.display=(k===t)?'':'none';});
  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
- if(t==='invest'){renderSectorValue(); if(D.valuation) renderValuation();}
+ if(t==='picks'){showPick(sub||PICK,push); return;}
  if(push!==false && location.hash!=='#'+t) history.replaceState(null,'','#'+t);
 }
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{showTab(b.dataset.tab);window.scrollTo(0,0);});
@@ -725,7 +745,7 @@ function valTh(k, extra){
 function renderValuation(){
 const V=D.valuation;
 $('valwarn').innerHTML=`<div class="help" style="border-left-color:#8b6fc0;margin-bottom:10px">
-<b style="color:#b39ddb">Intrinsic value</b> = median of up to 4 models (Graham Number, Graham Formula, DCF, Dividend Discount). <b>MoS</b> (margin of safety) = how far price sits below that. Buy ≥ ${V.params.mos_buy}%, Watch ≥ 5%.<br>
+<b style="color:#b39ddb">Intrinsic value</b> = median of up to 4 models (Graham Number, Graham Formula, DCF, Dividend Discount). <b>MoS</b> (margin of safety) = how far price sits below that. Buy ≥ ${V.params.mos_buy}%, Near value ≥ 5%.<br>
 <b>Confidence matters more than MoS</b>: <span style="color:#3ecf8e">high</span> = 3+ models agree closely · <span style="color:#e8b348">medium</span> · <span style="color:#f0647a">low</span> = models disagree, or it is a bank/insurer/REIT where DCF &amp; Graham structurally misprice. <b>A huge MoS with low confidence is usually a broken model, not a bargain.</b><br>
 Assumptions: ${V.params.discount}% discount rate, ${V.params.terminal}% terminal growth, growth capped at ${V.params.growth_cap}%, AAA yield ${V.params.aaa_yield}%. Trailing free data — one-off earnings distort it. Analyst target is shown for reference only and is never used in the blend.</div>`;
 const confPill=c=>c==='high'?'<span class="setupA">high</span>':c==='medium'?'<span class="setupC">medium</span>':'<span style="background:#3a1622;color:#f0647a;padding:1px 8px;border-radius:10px;font-weight:600">low</span>';
@@ -750,16 +770,16 @@ $('valtable').innerHTML=
 <td class="${s.fcf_yield==null?'':(s.fcf_yield<0?'neg':(s.fcf_yield>=5?'pos':''))}" title="${s.fcf_b!=null?'FCF $'+s.fcf_b+'B'+(s.fcf_ps!=null?' · $'+s.fcf_ps+'/share':''):'no free cash flow figure available'}">${s.fcf_yield==null?'<span class="dimc">–</span>':(s.fcf_yield>0?'+':'')+s.fcf_yield+'%'}</td>
 <td>${s.pe?s.pe.toFixed(1):'—'}</td><td>${s.fwd_pe?s.fwd_pe.toFixed(1):'—'}</td>
 <td class="dimc">${s.target?'$'+s.target.toFixed(0)+(s.target_up!=null?' ('+(s.target_up>=0?'+':'')+s.target_up+'%)':''):'—'}</td>
-<td>${s.verdict==='Buy'?'<span class="setupA">Buy</span>':'<span class="watch">Watch</span>'}</td>
+<td>${s.verdict==='Buy'?'<span class="setupA">Buy</span>':'<span class="dimc">Near value</span>'}</td>
 <td class="note">${s.why||''}</td></tr>`).join('')
 :'<tr><td class="dimc" colspan="13">No undervalued names this week.</td></tr>');
 $('valnote').innerHTML=`${V.n_valued} S&P 500 stocks valued (${V.n_failed} lacked data) · `
- +`${V.n_buy} Buy, ${V.n_watch} Watch · `
+ +`${V.n_buy} Buy, ${V.n_watch} Near value · `
  +(valSort
     ? `sorted by <b>${VAL_LABEL[valSort.k]}</b> ${valSort.dir===1?'ascending':'descending'} `
       +`· <a href="#" onclick="resetValSort();return false" style="color:var(--blue)">↺ back to default</a> `
-      +`(Buy first, then confidence, then margin of safety)`
-    : `default order: <b>Buy before Watch, then confidence, then margin of safety</b> — `
+      +`(Buy before Near value, then confidence, then margin of safety)`
+    : `default order: <b>Buy before Near value, then confidence, then margin of safety</b> — `
       +`click any column to re-sort`)
  +` · generated ${V.generated}`;}
 
@@ -768,7 +788,9 @@ $('valnote').innerHTML=`${V.n_valued} S&P 500 stocks valued (${V.n_failed} lacke
 // REASON, not a stale number that reads like a live buy-stop.
 function trigCell(s){
  const t=(s.trigger!=null?s.trigger:s.pivot);
- if(s.setup==='Watch' && t!=null && s.price>t){
+ // Only for a name still WAITING. Once the board marks it triggered, the daily follow-up has
+ // confirmed the entry, and this text contradicted the Triggered chip (BIIB, 2026-09-24).
+ if(s.setup==='Watch' && s.status!=='triggered' && t!=null && s.price>t){
   return `<span class="dimc" style="font-size:11px">no trade &mdash; cleared $${t} without the volume</span>`;
  }
  // Early rows carry no trigger yet - they have not fired a setup. Without this guard
@@ -821,9 +843,14 @@ function trigPL(s){
   return at+`<td><b class="${pl>=0?'pos':'neg'}">${pl>=0?'+':''}${pl.toFixed(1)}%</b></td>`;
 }
 function statusBadge(s){
- // Letter first (which setup), then a status mark. Details live in the cell's hover.
- if(s.status==='triggered') return badge(s.setup)+' <b class="pos">&#10003;</b>';
- if(s.status==='cancelled') return badge(s.setup)+' <b class="neg">&#10005;</b>';
+ // Status first, in words. It used to be the setup badge plus a mark, so a Watch name that
+ // triggered read "Watch ✓" - two opposite meanings in one cell (David, 2026-09-24). The
+ // A/B/C letter still follows because it says HOW it triggered; "Watch" is never shown
+ // next to a finished status.
+ const L=(s.setup==='A'||s.setup==='B'||s.setup==='C')?' '+badge(s.setup):'';
+ if(s.status==='triggered') return '<span class="stchip pos" title="Closed above its trigger - the entry fired.">Triggered</span>'+L;
+ if(s.status==='cancelled') return '<span class="stchip neg" title="Broke its trend before triggering - never bought.">Cancelled</span>'+L;
+ if(s.status==='sold') return '<span class="stchip dimc" title="A real position, since exited.">Sold</span>';
  if(s.status==='early') return '<span class="dimc" style="border:1px solid currentColor;padding:1px 8px;border-radius:10px;font-size:11px" title="Reclaimed its 50-day MA in an uptrend but has NOT fired a setup. Median 18 trading days from here to a trigger; 80% eventually trigger. Not actionable yet.">EARLY</span>';
  return badge(s.setup);
 }
@@ -857,7 +884,7 @@ function renderSectorValue(){
  $('secvalnote').innerHTML=`Sorted cheapest first. `+
   (cheap.length?`<b>${cheap.length>1?cheap.slice(0,-1).join(', ')+' and '+cheap[cheap.length-1]:cheap[0]}</b> ${cheap.length>1?'are':'is'} priced at or below modelled worth.`
    :`Every sector is priced above modelled worth — normal in a strong market, and partly a model artifact.`)+
-  ` A sector that is both <b>rising</b> and <b>cheap</b> is the rare combination; rising and richly priced is the common one, and it is what the Trader tab buys by design.`;
+  ` A sector that is both <b>rising</b> and <b>cheap</b> is the rare combination; rising and richly priced is the common one, and it is what the trading board buys by design.`;
 }
 function canonSec(n){const m={'Fin':'Financials','Health':'Healthcare','Indus':'Industrials',
  'Mat':'Materials','ConsDisc':'Consumer Discretionary','Staples':'Consumer Staples','Tech':'Technology',
@@ -957,7 +984,7 @@ function moveCell(s){
   if(s.status==='cancelled' || t==null || !(s.price>0)) return {txt:'–', cls:'dimc', title:''};
   if(s.price>=t) return {txt:s.setup==='Watch'?'cleared, no volume':'at trigger', cls:'dimc',
                          title:'Price is past the pivot without the confirming volume — not a trade.'};
-  return {txt:'+'+((t/s.price-1)*100).toFixed(1)+'% to go', cls:'', title:''};
+  return {txt:'needs +'+((t/s.price-1)*100).toFixed(1)+'%', cls:'', title:`Price must rise this much to reach the $${t} trigger.`};
 }
 function sharesCell(Z){
   if(Z.undersized) return `<span class="amber" title="One whole share risks ${Z.one}% at $${capital().toLocaleString()}, above the ${(100*(D.risk_pct||0.01)).toFixed(0)}% budget. About $${(Z.need||0).toLocaleString()} fits one share. The signal is unaffected.">0 ⚠</span>`;
@@ -972,7 +999,8 @@ function detailHTML(s,Z){
    ['Position', Z.position==null?'–':'$'+Z.position.toLocaleString()],
    ['Triggered @', t?`$${t.px} on ${t.on}`:'–'],
    ['Earnings', s.earnings?escH(s.earnings):'–'],
-   ['Value', v?`${v.verdict} · MoS ${signed(v.mos,0,'%')} · ${v.conf} confidence`:'–'],
+   ['Setup', (s.setup&&s.setup!=='Early'&&s.setup!=='Sold')?badge(s.setup):'–'],
+   ['Value', v?`${valLabel(v)} · ${v.conf} confidence`:'–'],
    ['Phase', s.phase?`${ccmPhaseCell(s)} <span class="dimc">${escH(s.phase_rule||'')}</span>`:'–'],
    ['Note', closedReason(s)||escH(s.note||'')||'–']];
   return '<div class="dgrid">'+bits.map(([k,x])=>`<div><span>${k}</span>${x}</div>`).join('')+'</div>';
@@ -999,7 +1027,7 @@ function renderShortlist(){
       +`<div class="bc-bot"><span class="${m.cls}" title="${plain(m.title)}">${m.txt}</span><span>${ccmPhaseCell(s)}</span></div>`
       +(OPEN.has(s.ticker)?detailHTML(s,Z):'')+'</div>';}).join('')+'</div>';
  } else {
-  h='<div class="tscroll"><table id="shortlist"><tr><th>Ticker</th><th>Setup</th><th>Price</th><th>Trigger</th><th>To go / P&amp;L</th>'
+  h='<div class="tscroll"><table id="shortlist"><tr><th>Ticker</th><th>Status</th><th>Price</th><th>Trigger</th><th>To trigger / P&amp;L</th>'
    +'<th style="white-space:nowrap">Phase <span class="qmark" onclick="event.stopPropagation();toggleHelp(&#39;phase&#39;)">?</span></th><th>Shares</th></tr>'
    + rows.map(s=>{const Z=sizeAt(s,cap), m=moveCell(s);
       const E=/^⚠/.test(s.earnings||'')?' <b class="amber" title="Earnings within 14 days — spec §5 blocks entry.">E</b>':'';
@@ -1026,7 +1054,7 @@ function switchView(v){
  ['global','sector','rotation'].forEach(k=>{const e=$('view-'+k); if(e) e.style.display=(k===v)?'':'none';});
  document.querySelectorAll('#viewtabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
  $('tfbar').style.display = v==='rotation' ? 'none' : '';
- if(v==='sector'){renderSectorFlow();renderRRG();}
+ if(v==='sector'){renderSectorFlow();renderRRG();renderSectorValue();}
 }
 window.switchView=switchView;
 function switchSub(s){
@@ -1243,6 +1271,13 @@ function renderRotation(){
 // the payload - the briefing is mechanical (briefing.py); no model writes any of it.
 const escH=s=>String(s==null?'':s).replace(/[&<>\u0022\u0027]/g,c=>'&#'+c.charCodeAt(0)+';');
 function boardRows(){return ['A','B','C','Watch'].flatMap(k=>D.tabs[k]||[]);}
+// Value wording (2026-09-24): the valuation verdict used to print "Watch", the same word as a
+// board setup with a different meaning. Now it says what it is: how far price sits under
+// modelled value. Buy = 20%+ under ("Cheap"), the valuation Watch list = 5-20% under.
+function valLabel(v){const u=Math.round(v.mos);
+ const t=`title="Price is ${u}% below modelled value (margin of safety), ${v.conf} confidence."`;
+ return v.verdict==='Buy'?`<span class="pos" ${t}>Cheap</span> <span class="dimc">${u}% under</span>`
+                         :`<span ${t}>Near value</span> <span class="dimc">${u}% under</span>`;}
 const VALV={}; (((D.valuation||{}).buy)||[]).concat(((D.valuation||{}).watch)||[]).forEach(v=>{VALV[v.t]=v;});
 function tile(label,n,sub,cls){return `<div class="tile${cls?' '+cls:''}"><div class="tl">${label}</div><div class="tn">${n}</div><div class="ts">${sub}</div></div>`;}
 function signed(v,d,sfx){ if(v==null) return '–'; return (v>0?'+':v<0?'−':'')+Math.abs(v).toFixed(d)+(sfx||''); }
@@ -1285,11 +1320,11 @@ function renderToday(){
  const W=B.watch||[], byT={}; rows.forEach(r=>{byT[r.ticker]=r;});
  if(B.error) h+=`<div class="sub">Briefing unavailable (${escH(B.error)}).</div>`;
  else if(!W.length) h+='<div class="sub">No live name is below its trigger today.</div>';
- else h+='<div class="tscroll"><table class="wl"><tr><th>Ticker</th><th>Setup</th><th>Price</th><th>Trigger</th><th>To go</th><th>Phase</th><th>Value</th></tr>'
+ else h+='<div class="tscroll"><table class="wl"><tr><th>Ticker</th><th>Status</th><th>Price</th><th>Trigger</th><th>To trigger</th><th>Phase</th><th>Value</th></tr>'
   + W.map(w=>{const r=byT[w.ticker]||w, v=VALV[w.ticker];
-     const go=w.to_go==null?'<span class="pos">triggered today</span>':'+'+w.to_go.toFixed(1)+'%';
+     const go=w.to_go==null?'<span class="pos">done today</span>':'<span title="Price must rise this much to reach the trigger.">needs +'+w.to_go.toFixed(1)+'%</span>';
      const E=/^⚠/.test(r.earnings||'')?' <b class="amber" title="Earnings within 14 days — spec §5 blocks entry.">E</b>':'';
-     const val=v?(v.verdict==='Buy'?'<span class="pos">Buy</span>':'Watch')+' <span class="dimc">'+signed(v.mos,0,'%')+'</span>':'<span class="dimc">–</span>';
+     const val=v?valLabel(v):'<span class="dimc" title="Not on the value screen: not valued, or not 5%+ below modelled value.">–</span>';
      return `<tr><td><b>${w.ticker}</b>${taTag(w.ticker)}</td><td>${statusBadge(r)}${E}</td><td>$${r.price}</td><td>$${w.trigger}</td><td>${go}</td><td>${ccmPhaseCell(r)}</td><td>${val}</td></tr>`;}).join('')
   + '</table></div>';
  h+='<h2>Headlines <span class="dimc" style="font-weight:400">· headlines, not analysis</span></h2>';
