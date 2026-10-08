@@ -1,0 +1,66 @@
+{
+  "_about": "Registry of every rule variant ever tested against the ACRS stock system (the 'database of failed rules'). Every entry that was actually run counts toward n_trials, and n_trials sets the Deflated Sharpe hurdle in ml/acrs_ml.py. Add a row BEFORE you run a new test, not after you like the result. Rows are never deleted - a rejected idea still spent part of the significance budget.",
+  "untracked_prior_trials": null,
+  "_untracked_note": "Set this to your honest estimate of variants tried before this registry existed (v1.0 -> v1.5 iterations, parameter tweaks). null = unknown; the report then shows the hurdle across a range of N instead of pretending it is small.",
+  "experiments": [
+    {
+      "id": "grid-2026-10",
+      "hypothesis": "Neighbouring parameter values (rs_threshold 15-35, exit MA 40-60, disaster stop 2.0-3.0 ATR) beat the frozen v1.5 values",
+      "variants": 9,
+      "status": "rejected",
+      "evidence": "Parameter-sensitivity grid on the simulation page: Sharpe 0.78-1.05 around base 0.90; no neighbour dominates on both return and drawdown. Frozen values kept."
+    },
+    {
+      "id": "rs13-entry-gate",
+      "hypothesis": "Require 13-week relative strength at stock entry",
+      "variants": 1,
+      "status": "rejected",
+      "decided": "2026-08-24",
+      "evidence": "Measured: it bought later and returned worse. Removed in v1.5; RS still gates sectors."
+    },
+    {
+      "id": "trailing-stop",
+      "hypothesis": "Replace the close-below-MA50 exit with a trailing stop",
+      "variants": 1,
+      "status": "rejected",
+      "evidence": "10y CAGR 2.3% vs 18.0%; exits 88% of positions on the stop instead of 27%."
+    },
+    {
+      "id": "profit-target-scaleout",
+      "hypothesis": "Sell half at +1R/+2R/+3R",
+      "variants": 3,
+      "status": "rejected",
+      "evidence": "As quoted on the flow report: 'selling half at +1R/+2R/+3R lost 0 of 5 periods, P=0.031, while winners keep running +8.1% for 60 days after exit.'"
+    },
+    {
+      "id": "regime-gate-setup-b",
+      "hypothesis": "Suppress Setup B pullback entries while SPY < 150-day MA",
+      "variants": 1,
+      "status": "adopted",
+      "evidence": "Backtested; live in v1.5."
+    },
+    {
+      "id": "shadow-old-trends-last",
+      "hypothesis": "When slots are scarce, take stocks whose 50>150 uptrend is 160+ days old last",
+      "variants": 1,
+      "status": "forward-test",
+      "decided": null,
+      "evidence": "10y: 19.5% vs 20.2% CAGR, worst drop -19.3% vs -21.4%. Shadow paper book started 2026-10-08, judged 2027-10-08."
+    },
+    {
+      "id": "ml-meta-label-filter",
+      "hypothesis": "A model on entry features (f_*) can skip the worst entries and keep more R than taking every signal",
+      "variants": 2,
+      "status": "rejected",
+      "decided": "2026-10-08",
+      "evidence": "Purged annual walk-forward 2023-2026 (ridge on winsorised R, logistic on win/loss). Both keep less R than take-all and have negative mean out-of-sample rank IC. Re-scored automatically every run by ml/acrs_ml.py; stays record-only unless it passes the promotion rule in the report."
+    },
+    {
+      "id": "setup-c-demotion",
+      "hypothesis": "Drop Setup C, or give it half size, so slots and risk go to A/B",
+      "variants": 0,
+      "status": "proposed",
+      "evidence": "Post-mortem 2026-10-08: Setup C is 209 of 330 backtest trades for about 0 R in total (+4.6R; -21.3R without its best 3). Not yet run as a portfolio-level A/B in the builder - slot competition means per-trade R does not settle it. variants stays 0 until it is run."
+    }
+  ]
+}
