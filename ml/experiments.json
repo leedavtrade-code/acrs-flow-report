@@ -66,33 +66,33 @@
       "id": "e1-setup-priority-slots",
       "hypothesis": "When more names qualify than open slots, take Setup A first, then B, then C (13-week relative strength, highest first, within a setup) instead of pure 13-week RS order",
       "variants": 1,
-      "status": "registered",
-      "decided": null,
-      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+      "status": "rejected",
+      "decided": "2026-10-08",
+      "evidence": "E1 10y vs same-snapshot baseline 19.1% CAGR / -22.4% maxDD / Sharpe 1.14 (661 trades). CAGR 16.0%, maxDD -21.5%, Sharpe 0.98; wins 4/5 periods, fails CAGR and both-halves (13.9/24.6 vs 18.3/32.7). Full write-up: acrs-research claude/e1-e4 research_out/e1_e4_result.md."
     },
     {
       "id": "e2-setup-c-half-size",
       "hypothesis": "Setup C entries risk 0.5% of equity instead of 1% (A and B unchanged), freeing risk budget for A/B without idling slots",
       "variants": 1,
-      "status": "registered",
-      "decided": null,
-      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+      "status": "rejected",
+      "decided": "2026-10-08",
+      "evidence": "E2 10y vs same-snapshot baseline 19.1% CAGR / -22.4% maxDD / Sharpe 1.14 (661 trades). CAGR 19.1% (+0.0), maxDD -19.5%, Sharpe 1.27; wins 4/5 periods; fails CAGR gate (+1.0 needed) and half 2 (32.3 vs 32.7). DSR 0.977 at N=24 vs baseline 0.946. Risk-lowering, not a pass. research_out/e1_e4_result.md on acrs-research claude/e1-e4."
     },
     {
       "id": "e3-drop-setup-c",
       "hypothesis": "Trade only Setups A and B (allowed=AB). Repeats Test 2 C1 (rejected 2026-09-28 on the 2026-08-18 snapshot) on the 2026-10-07 snapshot; run because it was pre-announced",
       "variants": 1,
-      "status": "registered",
-      "decided": null,
-      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+      "status": "rejected",
+      "decided": "2026-10-08",
+      "evidence": "E3 10y vs same-snapshot baseline 19.1% CAGR / -22.4% maxDD / Sharpe 1.14 (661 trades). CAGR 16.5%, maxDD -18.5%, Sharpe 1.09, 395 trades; wins 3/5 periods; fails CAGR, periods, halves. Repeats Test 2 C1 (16.6% vs 20.2%). research_out/e1_e4_result.md on acrs-research claude/e1-e4."
     },
     {
       "id": "e4-extension-cap",
       "hypothesis": "Skip any qualifier whose close is more than 15% (E4a) or 20% (E4b) above its 50-day MA (entry_filter on ext50)",
       "variants": 2,
-      "status": "registered",
-      "decided": null,
-      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+      "status": "rejected",
+      "decided": "2026-10-08",
+      "evidence": "E4a (15%) and E4b (20%) 10y vs same-snapshot baseline 19.1% CAGR / -22.4% maxDD / Sharpe 1.14 (661 trades). E4a CAGR 16.1%, maxDD -23.2%, 1/5 periods; E4b CAGR 16.7%, maxDD -26.5%, 2/5 periods; both fail all but E4a's DD check. research_out/e1_e4_result.md on acrs-research claude/e1-e4."
     }
   ]
 }
