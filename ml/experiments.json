@@ -61,6 +61,38 @@
       "variants": 0,
       "status": "proposed",
       "evidence": "Post-mortem 2026-10-08: Setup C is 209 of 330 backtest trades for about 0 R in total (+4.6R; -21.3R without its best 3). Not yet run as a portfolio-level A/B in the builder - slot competition means per-trade R does not settle it. variants stays 0 until it is run."
+    },
+    {
+      "id": "e1-setup-priority-slots",
+      "hypothesis": "When more names qualify than open slots, take Setup A first, then B, then C (13-week relative strength, highest first, within a setup) instead of pure 13-week RS order",
+      "variants": 1,
+      "status": "registered",
+      "decided": null,
+      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+    },
+    {
+      "id": "e2-setup-c-half-size",
+      "hypothesis": "Setup C entries risk 0.5% of equity instead of 1% (A and B unchanged), freeing risk budget for A/B without idling slots",
+      "variants": 1,
+      "status": "registered",
+      "decided": null,
+      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+    },
+    {
+      "id": "e3-drop-setup-c",
+      "hypothesis": "Trade only Setups A and B (allowed=AB). Repeats Test 2 C1 (rejected 2026-09-28 on the 2026-08-18 snapshot) on the 2026-10-07 snapshot; run because it was pre-announced",
+      "variants": 1,
+      "status": "registered",
+      "decided": null,
+      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
+    },
+    {
+      "id": "e4-extension-cap",
+      "hypothesis": "Skip any qualifier whose close is more than 15% (E4a) or 20% (E4b) above its 50-day MA (entry_filter on ext50)",
+      "variants": 2,
+      "status": "registered",
+      "decided": null,
+      "evidence": "pre-registered 2026-10-08 in acrs-research claude/e1-e4: research_out/e1_e4_prereg.md"
     }
   ]
 }
