@@ -1,283 +1,283 @@
 {
- "asof": "2026-10-09",
- "generated": "2026-10-11",
+ "asof": "2026-10-16",
+ "generated": "2026-10-18",
  "n_trials": 19,
  "post_mortem": {
-  "n": 346,
-  "total_R": 230.2,
-  "profit_factor": 3.17,
-  "top5pct_share_of_gross": 0.745,
+  "n": 355,
+  "total_R": 140.5,
+  "profit_factor": 2.13,
+  "top5pct_share_of_gross": 0.746,
   "by_setup": [
    {
     "setup": "A",
-    "n": 51,
-    "share": 0.147,
-    "win": 0.451,
-    "mean_R": 1.29,
-    "median_R": -0.15,
-    "total_R": 65.5,
-    "total_R_ex_top3": 25.9,
+    "n": 62,
+    "share": 0.175,
+    "win": 0.419,
+    "mean_R": 1.08,
+    "median_R": -0.37,
+    "total_R": 67.2,
+    "total_R_ex_top3": 6.7,
     "years_positive": 4,
     "years": 6,
     "by_year": {
-     "2021": -3.4,
-     "2022": 0.0,
-     "2023": 42.7,
-     "2024": 11.1,
-     "2025": 12.4,
-     "2026": 2.8
+     "2021": -2.8,
+     "2022": 0.3,
+     "2023": 37.7,
+     "2024": 6.9,
+     "2025": 31.7,
+     "2026": -6.6
     }
    },
    {
     "setup": "B",
-    "n": 56,
-    "share": 0.162,
-    "win": 0.357,
-    "mean_R": 1.92,
-    "median_R": -0.31,
-    "total_R": 107.5,
-    "total_R_ex_top3": -7.1,
-    "years_positive": 2,
+    "n": 71,
+    "share": 0.2,
+    "win": 0.352,
+    "mean_R": 0.96,
+    "median_R": -0.23,
+    "total_R": 68.0,
+    "total_R_ex_top3": -14.6,
+    "years_positive": 4,
     "years": 6,
     "by_year": {
-     "2021": -0.2,
-     "2022": -2.7,
-     "2023": -8.5,
-     "2024": 13.4,
-     "2025": 106.1,
-     "2026": -0.7
+     "2021": 1.1,
+     "2022": -1.0,
+     "2023": -1.6,
+     "2024": 1.6,
+     "2025": 67.3,
+     "2026": 0.6
     }
    },
    {
     "setup": "C",
-    "n": 239,
-    "share": 0.691,
-    "win": 0.402,
-    "mean_R": 0.24,
-    "median_R": -0.14,
-    "total_R": 57.1,
-    "total_R_ex_top3": 10.0,
-    "years_positive": 4,
+    "n": 222,
+    "share": 0.625,
+    "win": 0.378,
+    "mean_R": 0.02,
+    "median_R": -0.13,
+    "total_R": 5.3,
+    "total_R_ex_top3": -15.2,
+    "years_positive": 3,
     "years": 6,
     "by_year": {
-     "2021": 9.2,
-     "2022": -11.8,
-     "2023": 40.8,
-     "2024": 6.7,
-     "2025": 12.5,
-     "2026": -0.2
+     "2021": 8.2,
+     "2022": -11.7,
+     "2023": 2.3,
+     "2024": -1.2,
+     "2025": 9.3,
+     "2026": -1.7
     }
    }
   ],
   "by_exit": [
    {
     "exit": "DISASTER_CLOSE",
-    "n": 19,
-    "mean_R": -1.12,
-    "total_R": -21.2
+    "n": 23,
+    "mean_R": -1.25,
+    "total_R": -28.7
    },
    {
     "exit": "GAP_THROUGH",
-    "n": 10,
-    "mean_R": -1.19,
-    "total_R": -11.9
+    "n": 11,
+    "mean_R": -1.37,
+    "total_R": -15.1
    },
    {
     "exit": "MA50_CLOSE",
-    "n": 317,
-    "mean_R": 0.83,
-    "total_R": 263.3
+    "n": 321,
+    "mean_R": 0.57,
+    "total_R": 184.3
    }
   ],
   "stop_profile": {
    "f_ext50": [
-    13.09,
-    3.89
+    15.7,
+    3.82
    ],
    "f_rvol": [
-    1.7,
-    1.35
+    1.82,
+    1.38
    ],
    "f_to_pivot": [
-    -0.35,
-    -5.91
+    1.39,
+    -5.65
    ],
    "f_atrp": [
-    3.07,
+    3.1,
     3.15
    ]
   },
-  "stop_leak_R": -33.2,
+  "stop_leak_R": -43.8,
   "carrier": "B",
-  "p_carrier_not_better": 0.1383
+  "p_carrier_not_better": 0.349
  },
  "deflated_sharpe": {
-  "sharpe_annual": 1.49,
+  "sharpe_annual": 1.13,
   "days": 1254,
-  "skew": -0.03,
-  "kurtosis": 6.14,
-  "psr_vs_zero": 0.9995,
+  "skew": 0.48,
+  "kurtosis": 11.57,
+  "psr_vs_zero": 0.9946,
   "n_trials": 19,
   "table": [
    {
     "n": 1,
     "hurdle_annual": 0.0,
-    "dsr": 1.0,
+    "dsr": 0.995,
     "registry": false
    },
    {
     "n": 5,
     "hurdle_annual": 0.53,
-    "dsr": 0.983,
+    "dsr": 0.91,
     "registry": false
    },
    {
     "n": 10,
     "hurdle_annual": 0.71,
-    "dsr": 0.959,
+    "dsr": 0.83,
     "registry": false
    },
    {
     "n": 19,
     "hurdle_annual": 0.84,
-    "dsr": 0.925,
+    "dsr": 0.742,
     "registry": true
    },
    {
     "n": 20,
     "hurdle_annual": 0.85,
-    "dsr": 0.921,
+    "dsr": 0.734,
     "registry": false
    },
    {
     "n": 50,
     "hurdle_annual": 1.02,
-    "dsr": 0.851,
+    "dsr": 0.597,
     "registry": false
    },
    {
     "n": 100,
     "hurdle_annual": 1.13,
-    "dsr": 0.785,
+    "dsr": 0.496,
     "registry": false
    },
    {
     "n": 200,
     "hurdle_annual": 1.24,
-    "dsr": 0.711,
+    "dsr": 0.402,
     "registry": false
    }
   ],
-  "dsr": 0.925,
-  "first_n_below_95": 13,
-  "dsr_grid_dispersion": 0.998
+  "dsr": 0.742,
+  "first_n_below_95": 4,
+  "dsr_grid_dispersion": 0.986
  },
  "live": {
-  "n_live": 24,
-  "n_pre": 330,
-  "window_days": 71,
-  "n_pool": 307,
-  "live_total_R": -2.61,
-  "live_pf": 0.59,
-  "p_total_R_this_bad": 0.479,
-  "p_pf_this_bad": 0.414,
-  "p_total_R_this_bad_uncensored": 0.127,
-  "live_A": 3,
+  "n_live": 21,
+  "n_pre": 337,
+  "window_days": 76,
+  "n_pool": 321,
+  "live_total_R": -6.65,
+  "live_pf": 0.24,
+  "p_total_R_this_bad": 0.131,
+  "p_pf_this_bad": 0.122,
+  "p_total_R_this_bad_uncensored": 0.051,
+  "live_A": 4,
   "expected_A": 3.6,
-  "p_this_few_A": 0.513,
+  "p_this_few_A": 0.712,
   "live_mix": {
-   "A": 3,
-   "B": 6,
-   "C": 15
+   "A": 4,
+   "B": 3,
+   "C": 14
   },
   "drift": [
    {
     "feature": "f_rs13",
     "label": "13-wk RS",
-    "ks": 0.278,
-    "p": 0.0565,
-    "backtest_median": 20.59,
-    "live_median": 16.27
+    "ks": 0.301,
+    "p": 0.048,
+    "backtest_median": 18.87,
+    "live_median": 13.24
    },
    {
     "feature": "f_atrp",
     "label": "ATR %",
-    "ks": 0.209,
-    "p": 0.2234,
-    "backtest_median": 2.87,
-    "live_median": 3.33
+    "ks": 0.142,
+    "p": 0.7401,
+    "backtest_median": 2.82,
+    "live_median": 2.85
    },
    {
     "feature": "f_rvol",
     "label": "Relative volume",
-    "ks": 0.192,
-    "p": 0.3318,
-    "backtest_median": 1.21,
-    "live_median": 0.97
+    "ks": 0.328,
+    "p": 0.0225,
+    "backtest_median": 1.24,
+    "live_median": 1.0
    },
    {
     "feature": "f_ext50",
     "label": "% above MA50",
-    "ks": 0.22,
-    "p": 0.2064,
-    "backtest_median": 2.16,
-    "live_median": 4.92
+    "ks": 0.234,
+    "p": 0.2014,
+    "backtest_median": 2.36,
+    "live_median": 4.95
    },
    {
     "feature": "f_ext150",
     "label": "% above MA150",
-    "ks": 0.13,
-    "p": 0.7896,
-    "backtest_median": 14.97,
-    "live_median": 15.21
+    "ks": 0.151,
+    "p": 0.7066,
+    "backtest_median": 14.42,
+    "live_median": 16.11
    },
    {
     "feature": "f_ma_spread",
     "label": "MA50-MA150 spread",
-    "ks": 0.142,
-    "p": 0.7026,
-    "backtest_median": 10.75,
-    "live_median": 11.2
+    "ks": 0.225,
+    "p": 0.2339,
+    "backtest_median": 10.6,
+    "live_median": 11.42
    },
    {
     "feature": "f_to_pivot",
     "label": "% to pivot",
     "ks": 0.12,
-    "p": 0.8581,
-    "backtest_median": -5.92,
-    "live_median": -4.73
+    "p": 0.9035,
+    "backtest_median": -5.72,
+    "live_median": -4.62
    },
    {
     "feature": "f_dv20",
     "label": "20d $ volume",
-    "ks": 0.334,
-    "p": 0.0095,
-    "backtest_median": 265.75,
-    "live_median": 507.7
+    "ks": 0.296,
+    "p": 0.057,
+    "backtest_median": 290.4,
+    "live_median": 441.3
    },
    {
     "feature": "f_fip",
     "label": "FIP (13w)",
-    "ks": 0.093,
-    "p": 0.8966,
-    "backtest_median": -0.12,
+    "ks": 0.104,
+    "p": 0.8916,
+    "backtest_median": -0.11,
     "live_median": -0.12
    },
    {
     "feature": "f_fip252",
     "label": "FIP (1y)",
-    "ks": 0.198,
-    "p": 0.2274,
+    "ks": 0.232,
+    "p": 0.1634,
     "backtest_median": -0.06,
-    "live_median": -0.04
+    "live_median": -0.06
    },
    {
     "feature": "f_secrank",
     "label": "Sector rank",
-    "ks": 0.147,
-    "p": 0.3538,
+    "ks": 0.077,
+    "p": 0.8451,
     "backtest_median": 3.0,
-    "live_median": 2.5
+    "live_median": 3.0
    }
   ],
   "drift_bonferroni": 0.0045
@@ -287,57 +287,57 @@
   "folds": [
    {
     "year": 2023,
-    "n_train": 138,
-    "n_test": 75,
-    "take_all_R": 75.0,
-    "ridge_R": 40.2,
-    "ridge_ic": -0.088,
-    "logit_R": 34.9,
-    "logit_ic": 0.001
+    "n_train": 110,
+    "n_test": 86,
+    "take_all_R": 38.5,
+    "ridge_R": 34.2,
+    "ridge_ic": -0.037,
+    "logit_R": 18.8,
+    "logit_ic": -0.089
    },
    {
     "year": 2024,
-    "n_train": 213,
-    "n_test": 34,
-    "take_all_R": 31.1,
-    "ridge_R": 20.4,
-    "ridge_ic": -0.42,
-    "logit_R": 15.1,
-    "logit_ic": -0.396
+    "n_train": 196,
+    "n_test": 54,
+    "take_all_R": 7.3,
+    "ridge_R": 9.5,
+    "ridge_ic": 0.037,
+    "logit_R": 11.1,
+    "logit_ic": 0.112
    },
    {
     "year": 2025,
-    "n_train": 247,
-    "n_test": 56,
-    "take_all_R": 131.0,
-    "ridge_R": 61.8,
-    "ridge_ic": 0.065,
-    "logit_R": 51.9,
-    "logit_ic": 0.122
+    "n_train": 250,
+    "n_test": 62,
+    "take_all_R": 108.2,
+    "ridge_R": 36.7,
+    "ridge_ic": 0.015,
+    "logit_R": 35.1,
+    "logit_ic": 0.157
    },
    {
     "year": 2026,
-    "n_train": 304,
+    "n_train": 312,
     "n_test": 37,
-    "take_all_R": 1.9,
-    "ridge_R": -0.3,
-    "ridge_ic": -0.281,
-    "logit_R": -0.6,
-    "logit_ic": -0.336
+    "take_all_R": -7.6,
+    "ridge_R": -9.3,
+    "ridge_ic": -0.317,
+    "logit_R": -5.7,
+    "logit_ic": -0.248
    }
   ],
-  "take_all_R": 239.0,
+  "take_all_R": 146.4,
   "models": {
    "ridge": {
-    "filtered_R": 122.1,
-    "folds_beating_take_all": 0,
-    "mean_ic": -0.181,
+    "filtered_R": 71.1,
+    "folds_beating_take_all": 1,
+    "mean_ic": -0.075,
     "passes_backtest_rule": false
    },
    "logit": {
-    "filtered_R": 101.3,
-    "folds_beating_take_all": 0,
-    "mean_ic": -0.152,
+    "filtered_R": 59.3,
+    "folds_beating_take_all": 2,
+    "mean_ic": -0.017,
     "passes_backtest_rule": false
    }
   },
@@ -349,12 +349,13 @@
   "status": "rejected - stays record-only"
  },
  "findings": [
-  "Setup B carries the system: 56 of 346 trades (16%) produce +107.5R of +230.2R. Without its 3 best trades it still makes -7.1R and it was positive in 2 of 6 years (bootstrap P(not better than the rest) = 0.138).",
-  "Disaster-stop and gap exits cost -33.2R. Those entries were stretched: 13.1% above MA50 vs 3.9% for normal exits, RVOL 1.70 vs 1.35.",
-  "Returns are tail-driven: the top 5% of trades supply 74% of gross profit. Any filter that skips entries has to be judged on R kept, not on hit rate.",
-  "Live window: 24 closed trades, -2.61R, PF 0.59. Drawing 24 backtest trades that could have closed inside a 71-day window gives a result this bad 48% of the time (PF this low: 41%): normal for a young book. Comparing against all backtest trades, long winners included, would say 13% and wrongly suggest something broke. Only 3 Setup A entries vs 3.6 expected (P = 0.51); the live book has mostly been fed the setups that earn ~0R in the backtest too.",
+  "Setup B carries the system: 71 of 355 trades (20%) produce +68.0R of +140.5R. Without its 3 best trades it still makes -14.6R and it was positive in 4 of 6 years (bootstrap P(not better than the rest) = 0.349).",
+  "Setup C is 222 trades (62% of all entries) for +5.3R in total (-15.2R without its best 3). It occupies slots and risk budget for roughly zero edge; this is a hypothesis to test in the builder at portfolio level, not a rule change.",
+  "Disaster-stop and gap exits cost -43.8R. Those entries were stretched: 15.7% above MA50 vs 3.8% for normal exits, RVOL 1.82 vs 1.38.",
+  "Returns are tail-driven: the top 5% of trades supply 75% of gross profit. Any filter that skips entries has to be judged on R kept, not on hit rate.",
+  "Live window: 21 closed trades, -6.65R, PF 0.24. Drawing 21 backtest trades that could have closed inside a 76-day window gives a result this bad 13% of the time (PF this low: 12%): normal for a young book. Comparing against all backtest trades, long winners included, would say 5% and wrongly suggest something broke. Only 4 Setup A entries vs 3.6 expected (P = 0.71); the live book has mostly been fed the setups that earn ~0R in the backtest too.",
   "Entry-feature drift vs backtest: none significant after Bonferroni (p < 0.0045). The machine is buying the same kind of stocks.",
-  "ML entry filter (keep top 50% by model score), purged annual walk-forward: take-all +239.0R vs ridge +122.1R (IC -0.181) and logistic +101.3R (IC -0.152). Status: rejected - stays record-only.",
-  "Deflated Sharpe: the 5-year curve's Sharpe 1.49 gives DSR 0.93 at the registry's 19 trials; it drops below 0.95 at about 13 independent trials. This is before the survivorship look-ahead the simulation page already measures, which lowers it further."
+  "ML entry filter (keep top 50% by model score), purged annual walk-forward: take-all +146.4R vs ridge +71.1R (IC -0.075) and logistic +59.3R (IC -0.017). Status: rejected - stays record-only.",
+  "Deflated Sharpe: the 5-year curve's Sharpe 1.13 gives DSR 0.74 at the registry's 19 trials; it drops below 0.95 at about 4 independent trials. This is before the survivorship look-ahead the simulation page already measures, which lowers it further."
  ]
 }
